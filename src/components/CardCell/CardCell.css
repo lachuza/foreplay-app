@@ -1,0 +1,13 @@
+.cardCell {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  border: 0p;
+  background-color: blueviolet;
+
+  & > div {
+    width: 100%;
+    height: 100%;
+  }
+}
