@@ -1,0 +1,122 @@
+.gridCell { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  grid-column-gap: 3px;
+} 
+
+.manDot {
+  height: 20px;
+  width: 20px;
+  background-color:cyan;
+  border-radius: 50%;
+  display: inline-block;  
+}
+
+.womanDot {
+  height: 20px;
+  width: 20px;
+  background-color:palevioletred;
+  border-radius: 50%;
+  display: inline-block;  
+}
+.imgDICES{
+  background-image: url(/images/dices.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: white;
+}
+
+.imgBED{
+  background-image: url(/images/bed.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: white;
+}
+
+.imgGOBACK{
+  background-image: url(/images/goback.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: white;
+  
+}
+
+.imgInvert{
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.imgGOBACKN{
+  background-image: url(/images/gobackn.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: white;
+}
+
+.imgHEARTS{
+  background-image: url(/images/hearts.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: white;
+}
+
+.imgPICKUP{
+  background-image: url(/images/pickup.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: black;
+}
+
+.imgPICKUPOTHER{
+  background-image: url(/images/pickupother.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: black;
+}
+
+.imgLEVEL1{
+  background-image: url(/images/asofhearts.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: #ffd8a8;
+}
+
+.imgLEVEL2{
+  background-image: url(/images/2ofhearts.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: #ffd8a8;}
+
+.imgLEVEL3{
+  background-image: url(/images/3ofhearts.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: #ffd8a8;}
+
+.imgLEVEL4{
+  background-image: url(/images/4ofhearts.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  background-color: #ffd8a8;}
