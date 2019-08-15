@@ -1,5 +1,7 @@
 import React from 'react';
 import css from "./GridCell.css";
+import { connect } from "react-redux";
+
 
 const GridCell = (props) => {
   const {    
@@ -11,10 +13,21 @@ const GridCell = (props) => {
   return (
     
     <div className={`box gridCell img${cellContent}`} id={cellName}>
-         {/* <div className="dot"></div>
-        <div className="redDot"></div>  */}
+    {cellName == props.posMan && <div className="manDot"></div>}
+    {cellName == props.posWoman && <div className="womanDot"></div>}
     </div>
   )
 }
 
-export default GridCell
+const mapStateToProps = state => {
+  return {
+    posMan: state.posMan,
+    posWoman: state.posWoman
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GridCell);

@@ -1,5 +1,7 @@
 import React from 'react';
-import './Dice.css'
+import './Dice.css';
+import { connect } from "react-redux";
+import { rollDice,beforeRoll} from '../../store/actions';
 
 class Dice extends React.Component {
     constructor(props) {
@@ -17,16 +19,23 @@ class Dice extends React.Component {
     }
 
     handleClick(e) {
-        var die = document.getElementById("die");
+
+        if (this.props.activeDice){
+            var die = document.getElementById("die");
         var sides = this.sides
 
         die.classList.add("rolling");
-
-        setTimeout(function () {
+        this.props.beforeRoll();
+        setTimeout(() => {
             var roll = Math.floor(Math.random() * (sides.length))
             die.classList.remove("rolling");
             die.style.transform = sides[roll];
-        }, 750);
+            this.props.rollDice(roll+1);
+          }, 750)
+        }
+        
+
+        
     }
 
     render() {
@@ -35,13 +44,29 @@ class Dice extends React.Component {
         });
 
         return (
+            <div class="diceContainer" disa>
             <div className="die-container" onClick={ this.handleClick }>
                 <div id="die" className={'d' + this.sides.length}>
                     { divs }
                 </div>
             </div>
+            </div>
         );
     }
 }
 
-export default Dice;
+const mapStateToProps = state => {
+    return {activeDice:state.activeDice};
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      rollDice: dice => {
+        return dispatch(rollDice(dice));
+      },
+      beforeRoll: ()=>{return dispatch(beforeRoll())}
+    };
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Dice);
+

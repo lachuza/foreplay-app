@@ -74,6 +74,7 @@
   grid-column-end: 6; 
   grid-row-start: 7; 
   grid-row-end: 9;
+  
 }
 
 .boxM12 { 
@@ -141,4 +142,15 @@
     background-repeat: no-repeat;
     background-position: center;
     display: inline;
-    background-color: #ffd8a8;}
+    background-color: #ffd8a8;
+  }
+
+   .imgBackCard{
+    background-image: url(/images/back_card.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline;
+    background-color: #ffd8a8;
+    
+   }
