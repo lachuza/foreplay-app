@@ -10,7 +10,10 @@ export const types = {
   GO_BACK_N:"GO_BACK_N",
   FINISH: "FINISH",
   START: "START",
-  BEFORE_ROLL: "BEFORE_ROLL"
+  BEFORE_ROLL: "BEFORE_ROLL",
+  PICK_FIRST_TASK: "PICK_FIRST_TASK",
+  PICK_SECOND_TASK: "PICK_SECOND_TASK"
+  
 };
 
 export const rollDice = dice => {
@@ -86,4 +89,20 @@ export const pickTask = () => {
     type: types.PICK_TASK
   };
 };
+
+export const pickFirstTask = () => {
+  return {
+    type: types.PICK_FIRST_TASK
+  };
+};
+
+export const pickSecondTask = () => {
+  return {
+    type: types.PICK_SECOND_TASK
+  };
+};
+
+
+
+
 

@@ -1,5 +1,5 @@
 import { types } from '../store/actions';
-import { CELLS,CELLSCONTENT } from '../constants'
+import { CELLS,CELLSCONTENT,BOARD } from '../constants'
 
 
 const initialState = {
@@ -9,6 +9,8 @@ const initialState = {
   levelWoman:1,
   turn: false,
   CELLSCONTENT: CELLSCONTENT,
+  CELLS: CELLS,
+  BOARD: BOARD,
   nextAction:'',
   gameStarted: false,
   activeDice:false,
@@ -16,9 +18,16 @@ const initialState = {
   showMessage:false
 };
 
+
 const reducer = (state = initialState, action) => {
   if (action.type === types.START){
-    return {...state,gameStarted:true,nextAction:"ROLL_DICE",activeDice:true};
+    let playerTurn=false;
+    var playerStart = Math.floor(Math.random() * 2);
+    if (playerStart==1){
+      playerTurn=true;
+    }
+    return {...state,gameStarted:true,nextAction:"ROLL_DICE",activeDice:true,turn:playerTurn,goForward:true,
+    showMessage:false,posMan: 1,posWoman: 1,levelMan:1,levelWoman:1};
   }
   if (action.type === types.ROLL_DICE) {    
     let  newRoll= action.payload;
@@ -45,7 +54,7 @@ const reducer = (state = initialState, action) => {
         newRollWoman = newRollWoman-32;
         levelWoman = levelWoman +1;
       } 
-      newAction = CELLSCONTENT[newRollWoman-1];
+      newAction = state.BOARD[newRollWoman-1];
     }else{
       if(state.goForward)
         newRollMan = state.posMan + newRoll;
@@ -63,7 +72,7 @@ const reducer = (state = initialState, action) => {
         newRollMan = newRollMan-32;
         levelMan = levelMan+1;
       } 
-      newAction = CELLSCONTENT[newRollMan-1];
+      newAction = state.BOARD[newRollMan-1];
     }
     
     return {
@@ -112,16 +121,32 @@ const reducer = (state = initialState, action) => {
   }
 
   if (action.type === types.PICK_TASK) {
-    let level= state.levelMan;
+    let player= 'HOMBRE';
     if (state.turn){
-      level=state.levelWoman;
+      player='MUJER';
     }
     return {
       ...state,      
       showMessage:true,
       activeDice:false,
-      task: "SOY UNA PRUEBA",
-      nextAction: 'PICK_TASK'
+      task: `${player} HACE PRUEBA`,
+      nextAction: 'PICK_TASK',
+      level:0
+    };
+  }
+
+  if (action.type === types.PICK_FIRST_TASK) {
+    let player= 'MUJER';
+    if (state.turn){
+      player='HOMBRE';
+    }
+    return {
+      ...state,      
+      showMessage:true,
+      activeDice:false,
+      task: `${player} HACE PRUEBA`,
+      nextAction: 'PICK_BOTH',
+      level:0
     };
   }
 
@@ -133,6 +158,19 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,      
       showMessage:true,
+      activeDice:false,
+      level: level
+    };
+  }
+
+  if (action.type === types.PICK_SECOND_TASK) {
+    let level= state.levelMan;
+    if (state.turn){
+      level=state.levelWoman;
+    }
+    return {
+      ...state,      
+      showMessage:false,
       activeDice:false,
       level: level
     };
@@ -158,19 +196,49 @@ const reducer = (state = initialState, action) => {
     };
   }
 
+  if (action.type === types.PICK_BOTH) {
+    let level= state.levelMan;
+    if (state.turn){
+      level=state.levelWoman;
+    }
+    return {
+      ...state,      
+      showMessage:true,
+      activeDice:false,
+      level: level
+    };
+  }
+  
+
   
 
   if (action.type === types.GO_BACK) {
-    //calcular cama
     let position= state.posMan;
+    let posWoman= state.posWoman;
+    let posMan = state.posMan;
     if (state.turn){
       position=state.posWoman
     }
+    //calcular cama
+    for (var i = position; i > 0; i--){
+      if (state.BOARD[i-1]=="BED"){
+        position=i;
+        break;
+      }
+    }
+    if (state.turn){
+      posWoman=position;
+    }else{
+      posMan=position;
+    }
     
     return {
-      ...state,
-      goForward:false,
-      activeDice:true
+      ...state,      
+      activeDice:true,
+      posMan: posMan,
+      posWoman: posWoman,
+      turn: !state.turn,      
+      showMessage:false
     };
   }
   

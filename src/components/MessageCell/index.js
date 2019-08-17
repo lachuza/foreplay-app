@@ -14,15 +14,17 @@ function renderSwitch(param,level,task) {
     case 'HEARTS':
         return <NextTurn action={param} showButton={false}>Ambos deben realizar una prenda</NextTurn>;
     case 'DICES':
-        return <NextTurn action={param} showButton={false}>Tira de nuevo</NextTurn>;
+        return <NextTurn action={param} showButton={false}>Nueva oportunidad, lanza el dado nuevamente.</NextTurn>;
     case 'GOBACKN':
-        return <NextTurn action={param} showButton={false}>Estas muy apurado, debes tirar el dado y retroceder.</NextTurn>;
+        return <NextTurn action={param} showButton={false}>Estas muy apurado, lanza el dado y retrocede.</NextTurn>;
     case 'PICKUPOTHER':
-        return <NextTurn action={param} showButton={false}>Tu pareja levanta una accion</NextTurn>;
+        return <NextTurn action={param} showButton={false}>Tu pareja levanta una accion</NextTurn>;      
     case 'GOBACK':
         return <NextTurn action={param} showButton={true}>Vuelves a la cama mas cercana.</NextTurn>;
     case 'PICK_TASK':
-          return <NextTurn action={param} showButton={true}>{task}</NextTurn>;                                
+          return <NextTurn action={param} showButton={true}>{task}</NextTurn>;
+    case 'PICK_BOTH':
+          return <NextTurn action={param} showButton={true}>{task}</NextTurn>;                                      
     default:
         return param;
   }

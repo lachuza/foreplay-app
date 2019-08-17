@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { toogleTurn,pickUp,pickBoth,pickOther,goBack,goBackN,rollAgain } from '../../store/actions';
+import { toogleTurn,pickUp,pickBoth,pickOther,goBack,goBackN,rollAgain,pickSecondTask } from '../../store/actions';
 
 
 class NextTurn extends React.Component {
@@ -37,7 +37,9 @@ class NextTurn extends React.Component {
     
     switch(this.props.action) {      
       case 'GOBACK':
-        this.props.goBack();break;                                        
+        this.props.goBack();break;
+      case 'PICK_BOTH':
+          this.props.pickSecondTask();break;                                          
       default:
         this.props.toogleTurn();break;
     }
@@ -45,7 +47,9 @@ class NextTurn extends React.Component {
   }
   render() {
     return (
-      <div> {this.props.children}{this.props.showButton && <button onClick={this.handleClick}>Next</button>}</div>
+      <div> {this.props.children}{this.props.showButton && 
+      
+      <button onClick={this.handleClick}>Continuar</button>}</div>
 
     );
   }
@@ -68,7 +72,7 @@ const mapDispatchToProps = dispatch => {
       return dispatch(pickUp());
     },    
     pickBoth: () => {
-      return dispatch(pickBoth());
+      dispatch(pickBoth());
     },
     goBackN: () => {
       return dispatch(goBackN());
@@ -81,6 +85,9 @@ const mapDispatchToProps = dispatch => {
     },
     rollAgain: () => {
       return dispatch(rollAgain());
+    },
+    pickSecondTask: () => {
+      return dispatch(pickSecondTask());
     }
     
 
